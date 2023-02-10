@@ -21,7 +21,7 @@ exports.getBusinesses = (page, limit, callback) => {
     if (isNaN(page) || isNaN(limit)) {
       return callback(new Error("Page and limit must be set as numbers"));
     }
-    db.query('SELECT * FROM businesses WHERE citySlug = ? OR address LIKE ? LIMIT ?, ?', [city, '%' + city + '%', (page - 1) * limit, limit], (err, results) => {
+    db.query('SELECT * FROM businesses WHERE citySlug = ? LIMIT ?, ?', [city, (page - 1) * limit, limit], (err, results) => {
       if (err) return callback(err);
       callback(null, results);
     });
