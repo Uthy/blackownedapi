@@ -1,0 +1,205 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Black Biz API",
+        "version": "1.0.0",
+        "description": "API that contains a wide range of information about black-owned businesses",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "X-API-Key"
+        }
+    },
+    "host": "localhost:80",
+    "basePath": "/v1/",
+    "tags": [{
+        "name": "Production",
+        "description": "Publicly accessible API routes"
+    }],
+    "paths": {
+        "/businesses": {
+            "get": {
+                "summary": "Get businesses by page and limit",
+                "security": [{
+                    "ApiKeyAuth": []
+                }],
+                "tags": [
+                    "Production"
+                ],
+                "parameters": [{
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page Number",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The maximum number of businesses to return",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/businesses/{id}": {
+            "get": {
+                "summary": "Get business by id",
+                "security": [{
+                    "ApiKeyAuth": []
+                }],
+                "tags": [
+                    "Production"
+                ],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "Get a business by ID",
+                    "required": true,
+                    "type": "integer"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/businesses/city/{city}": {
+            "get": {
+                "summary": "Get businesses by city",
+                "security": [{
+                    "ApiKeyAuth": []
+                }],
+                "tags": [
+                    "Production"
+                ],
+                "parameters": [{
+                        "name": "city",
+                        "in": "path",
+                        "description": "Get businesses by city. Multiple word cities should be hyphenated. e.g. new-york for New York",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The maximum number of businesses to return",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/businesses/state/{state}": {
+            "get": {
+                "summary": "Get businesses by state",
+                "security": [{
+                    "ApiKeyAuth": []
+                }],
+                "tags": [
+                    "Production"
+                ],
+                "parameters": [{
+                        "name": "state",
+                        "in": "path",
+                        "description": "Get businesses by state. use two letter Acronym of state e.g. NY for New York",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The maximum number of businesses to return",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/businesses/category/{category}": {
+            "get": {
+                "summary": "Get businesses by categoy.",
+                "security": [{
+                    "ApiKeyAuth": []
+                }],
+                "tags": [
+                    "Production"
+                ],
+                "parameters": [{
+                        "name": "category",
+                        "in": "path",
+                        "description": "Category of business",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The maximum number of businesses to return",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": "http"
+}

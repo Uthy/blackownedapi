@@ -8,8 +8,11 @@ const signup =  require('./src/routes/signup');
 const login =  require('./src/routes/login');
 const middleware = require('./src/middleware/index')
 const apiCheck = middleware.validateAPI;
-const app = express();
+const swaggerUi = require('swagger-ui-express');
+const fs = require('fs');
+const SWAGGER_SETTINGS = require('./config');
 
+const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,6 +30,15 @@ app.use('/v1/', businessRoutes);
 app.use('/v1/', categoryRoutes);
 app.use('/', signup);
 app.use('/', login);
+
+
+const json = fs.readFileSync('swagger.json', 'utf-8');
+const parsed = JSON.parse(json);
+
+parsed.host = SWAGGER_SETTINGS.host;
+parsed.schemes = SWAGGER_SETTINGS.schemes;
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(parsed));
 
 app.use((err, req, res, next) => {
     res.status(err.status || 500).send({
