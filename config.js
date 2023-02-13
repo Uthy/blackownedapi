@@ -7,4 +7,6 @@ const SWAGGER_SETTINGS = {
     schemes: `${isProduction ? ['https'] : ['http']}`,
 };
 
-module.exports = SWAGGER_SETTINGS;
+const SWAGGER_PAGE = {customSiteTitle: 'Black Biz API Documentation'}
+
+module.exports = {SWAGGER_SETTINGS, SWAGGER_PAGE};
