@@ -2,7 +2,7 @@ require('dotenv').config();
 const apiKeysModel = require('../models/apiKeys');
 var nodemailer = require('nodemailer');
 
-const EMAIL_HOST = process.env.EMAIL_HOST;
+const EMAIL_SERVICE = process.env.EMAIL_SERVICE;
 const SEND_EMAIL = process.env.SEND_EMAIL;
 const SEND_PWD = process.env.SEND_PWD;
 
@@ -27,9 +27,7 @@ module.exports = {
   },
 
   transporter: nodemailer.createTransport({
-    host: EMAIL_HOST,
-    port: 587,
-    secure: false,
+    service: EMAIL_SERVICE,
     auth: {
         user: SEND_EMAIL,
         pass: SEND_PWD

@@ -10,7 +10,7 @@ const middleware = require('./src/middleware/index')
 const apiCheck = middleware.validateAPI;
 const swaggerUi = require('swagger-ui-express');
 const fs = require('fs');
-const SWAGGER_SETTINGS = require('./config');
+const {SWAGGER_SETTINGS, SWAGGER_PAGE} = require('./config');
 
 const app = express();
 
@@ -34,11 +34,10 @@ app.use('/', login);
 
 const json = fs.readFileSync('swagger.json', 'utf-8');
 const parsed = JSON.parse(json);
-
 parsed.host = SWAGGER_SETTINGS.host;
 parsed.schemes = SWAGGER_SETTINGS.schemes;
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(parsed));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(parsed, SWAGGER_PAGE));
 
 app.use((err, req, res, next) => {
     res.status(err.status || 500).send({

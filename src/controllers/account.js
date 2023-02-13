@@ -25,7 +25,7 @@ module.exports = {
               to: email,
               subject: 'Your BlackBizAPI Key',
               html: `<p>Hello, ${first_name}</p><br/>
-                    <p>Your BlackBizAPI Key is: ${key}</p>`
+                    <p>Your BlackBizAPI Key: <br/> <b>${key}</b></p>`
             };
 
             if (error) return res.status(500).json({ error });
