@@ -21,6 +21,14 @@ module.exports = {
       return callback(null, results[0]);
     })
   },  
+
+  getUserByEmail: (email, callback) => {
+    const query = 'SELECT * FROM users WHERE email = ?';
+    db.query(query, [email], (error, results) => {
+      if (error) return callback(error);
+      return callback(null, results[0]);
+    })
+  },  
   
   getAPIKeyByUserId: (userId, callback) => {
     const query = 'SELECT api_key FROM api_keys WHERE user_id = ?';
