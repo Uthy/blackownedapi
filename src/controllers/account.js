@@ -53,7 +53,6 @@ module.exports = {
   login: (req, res) => {
     try {
       const { password, username } = req.body;
-      console.log(password, username)
       userModel.getUserByEmail(username, (error, user) => {
         if (error) return res.status(500).json({ error });
         if (!user) return res.status(400).json({ error: 'Username or password is incorrect' });
